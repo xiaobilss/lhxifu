@@ -32,24 +32,30 @@
 </template>
 <script>
 import Api from "../network/api"
+import axios from "axios"
+import user  from "../network/user"
 
 export default {
     nmae:"Login",
     data(){
         return{
             year:new Date().getFullYear(),
-            userName:18220392076,
-            passWord:'a123456'
+            userName:"admin",
+            passWord:'a112233.'
         }
     },
     methods:{
         btn1(){
-             Api.getLogin(this.userName,this.passWord)
+            Api.getLogin(this.userName,this.passWord)
              .then( res =>{
                 console.log(res);
+                user.toke =res.message;
+                this.$router.push("/home")
              }).catch(err =>{
                 console.log(err);
              })
+
+            //  this.$router.push("/home")
             
         },
         btn2(){
@@ -117,8 +123,5 @@ export default {
     text-align: center;
     padding: 0 30px;
 }
-
-</style>
-<style >
 
 </style>

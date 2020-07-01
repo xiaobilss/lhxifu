@@ -1,4 +1,4 @@
-var toke=""
+var userName=""
 export default{
-    toke
+    userName
 }

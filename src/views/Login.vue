@@ -7,7 +7,7 @@
                 <h2><span>管理员登录</span></h2>
                 <p>从业服装设计20多年，1000多款职业装设计经验！</p>
 
-                <el-form >
+                <!-- <el-form >
                     
                     <el-input v-model="userName" placeholder="请输入用户名"  >
                         <i slot="prefix" class="el-input__icon el-icon-user"></i>
@@ -16,11 +16,25 @@
                         <i slot="prefix" class="el-input__icon el-icon-lock"></i>
                     </el-input>
                     
-                </el-form>
-                <div class="btn" >
+                </el-form> -->
+                  <!-- <div class="btn" >
                     <el-button type="primary" round @click="btn1">登 录</el-button>
                     <el-button type="info" round @click="btn2">重 置</el-button>
-                </div>
+                </div> -->
+                <el-form :model="form" :rules="rules" ref="loginFormRef">
+                    <el-form-item prop="userName">
+                        <el-input v-model="form.userName" prefix-icon="el-input__icon el-icon-user" placeholder="请输入用户名"  />
+                    </el-form-item>
+                     <el-form-item prop="passWord">
+                        <el-input v-model="form.passWord" prefix-icon="el-input__icon el-icon-lock" placeholder="请输入密码" show-password />   
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" round @click="btn1">登 录</el-button>
+                        <el-button type="info" round @click="btn2">重 置</el-button>
+                    </el-form-item>
+                </el-form>
+                
+                
 
             </div>    
         </div> 
@@ -32,7 +46,7 @@
 </template>
 <script>
 import Api from "../network/api"
-import axios from "axios"
+
 import user  from "../network/user"
 
 export default {
@@ -40,33 +54,67 @@ export default {
     data(){
         return{
             year:new Date().getFullYear(),
-            userName:"admin",
-            passWord:'a112233.'
+            form:{
+                userName:"admin",
+                passWord:'a112233..'
+            },
+            rules:{
+                userName:[
+                    { required: true, message: '请输入活动名称', trigger: 'blur' },
+                    { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+                ],
+                passWord:[
+                    { required: true, message: '请输入活动名称', trigger: 'blur' },
+                    { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' }
+                ]
+
+            }
+
         }
     },
     methods:{
         btn1(){
-            Api.getLogin(this.userName,this.passWord)
-             .then( res =>{
-                console.log(res);
-                user.toke =res.message;
-                this.$router.push("/home")
-             }).catch(err =>{
-                console.log(err);
-             })
+            //登录
+            this.$refs.loginFormRef.validate(callback =>{
+                if(callback){
+                    Api.getLogin(this.userName,this.passWord)
+                    .then( res =>{
+                        console.log("getLogin",res);
+                        user.userName =this.userName;
+                        console.log("user.userName:",user.userName);
+                        
+                        this.$router.push("/home");
+                        this.$message({
+                            message: '恭喜你，这是一条成功消息',
+                            type: 'success'
+                        });
+                        
+                    }).catch(err =>{
+                        // console.log(err);
+                        this.$message.error("错了哦，这是一条错误消息");
+                    })
+                }else{
+                      this.$message.error("错了哦，这是一条错误消息");
+                }
+            })
 
-            //  this.$router.push("/home")
+            
             
         },
         btn2(){
+            // 重置
+            // console.log(this);
+            this.$refs.loginFormRef.resetFields();
+          
+            
         //    this.userName = "" ;
         //    this.passWord = "" ;
-            Api.querySubordinateSumApi()
-            .then( res =>{
-                console.log(res);
-             }).catch(err =>{
-                console.log(err);
-             })
+            // Api.querySubordinateSumApi()
+            // .then( res =>{
+            //     console.log(res);
+            //  }).catch(err =>{
+            //     console.log(err);
+            //  })
         }
     }
     

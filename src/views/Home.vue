@@ -5,7 +5,7 @@
             <el-row >
                 <el-col :span="2" ><div ></div></el-col>
                 <el-col :span="20"><div>Hi,<span class="userName">{{userName}}</span>欢迎使用龙皇后台管理系统</div></el-col>
-                <el-col :span="2"><div class="userName">返回首页</div></el-col>
+                <el-col :span="2"><div class="userName" @click="signOut">退出</div></el-col>
             </el-row>
         </el-header>
         <el-container>
@@ -68,10 +68,16 @@ export default {
         }
     },
     created(){
+        this.userName=user.userName
         
-            this.userName=user.userName
-        
+    },
+    methods:{
+        signOut(){
+            window.sessionStorage.clear();
+            this.$router.push("/login");
+        }
     }
+
     
 }
 </script>

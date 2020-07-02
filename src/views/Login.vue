@@ -6,21 +6,6 @@
                 <h4>龙煌后台管理</h4>
                 <h2><span>管理员登录</span></h2>
                 <p>从业服装设计20多年，1000多款职业装设计经验！</p>
-
-                <!-- <el-form >
-                    
-                    <el-input v-model="userName" placeholder="请输入用户名"  >
-                        <i slot="prefix" class="el-input__icon el-icon-user"></i>
-                    </el-input>
-                    <el-input v-model="passWord" placeholder="请输入密码" show-password >
-                        <i slot="prefix" class="el-input__icon el-icon-lock"></i>
-                    </el-input>
-                    
-                </el-form> -->
-                  <!-- <div class="btn" >
-                    <el-button type="primary" round @click="btn1">登 录</el-button>
-                    <el-button type="info" round @click="btn2">重 置</el-button>
-                </div> -->
                 <el-form :model="form" :rules="rules" ref="loginFormRef">
                     <el-form-item prop="userName">
                         <el-input v-model="form.userName" prefix-icon="el-input__icon el-icon-user" placeholder="请输入用户名"  />
@@ -33,9 +18,6 @@
                         <el-button type="info" round @click="btn2">重 置</el-button>
                     </el-form-item>
                 </el-form>
-                
-                
-
             </div>    
         </div> 
         <p class="login-footer">
@@ -56,7 +38,7 @@ export default {
             year:new Date().getFullYear(),
             form:{
                 userName:"admin",
-                passWord:'a112233..'
+                passWord:'a112233.'
             },
             rules:{
                 userName:[
@@ -75,46 +57,34 @@ export default {
     methods:{
         btn1(){
             //登录
+            
             this.$refs.loginFormRef.validate(callback =>{
                 if(callback){
-                    Api.getLogin(this.userName,this.passWord)
+                    Api.getLogin(this.form.userName,this.form.passWord)
                     .then( res =>{
-                        console.log("getLogin",res);
-                        user.userName =this.userName;
-                        console.log("user.userName:",user.userName);
-                        
-                        this.$router.push("/home");
-                        this.$message({
-                            message: '恭喜你，这是一条成功消息',
-                            type: 'success'
-                        });
-                        
+                        if(res.result==="success"){
+                            user.userName=this.form.userName;
+                            window.sessionStorage.setItem("toke",res.message)
+                            this.$message({
+                                message: '登录成功，欢迎'+user.userName,
+                                type: 'success'
+                            });
+                            this.$router.push("/home");
+                        }else{
+                            this.$message.error("用户名或者密码输入错误");
+                        }
                     }).catch(err =>{
-                        // console.log(err);
-                        this.$message.error("错了哦，这是一条错误消息");
+                        console.log(err);
+                        this.$message.error("用户名或者密码输入错误");
                     })
                 }else{
-                      this.$message.error("错了哦，这是一条错误消息");
+                      this.$message.error("用户名或者密码不能为空");
                 }
             })
-
-            
-            
         },
         btn2(){
             // 重置
-            // console.log(this);
             this.$refs.loginFormRef.resetFields();
-          
-            
-        //    this.userName = "" ;
-        //    this.passWord = "" ;
-            // Api.querySubordinateSumApi()
-            // .then( res =>{
-            //     console.log(res);
-            //  }).catch(err =>{
-            //     console.log(err);
-            //  })
         }
     }
     

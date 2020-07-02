@@ -7,7 +7,7 @@ Vue.use(Router)
 
 
 
-export default new Router({
+const router= new Router({
     //配置路径
     mode:"history",
     routes:[
@@ -33,4 +33,20 @@ export default new Router({
     ]    
     
 })
+
+router.beforeEach((to,from,next)=>{
+    // to 将要访问那个位置
+    // from  从哪个路径过来
+    // next  放行
+    if(to.path == "/login" ) return next();
+    const toke = window.sessionStorage.getItem("toke");
+    if(!toke) return next("/login");
+    next();
+
+
+
+})
+
+
+export default router
 

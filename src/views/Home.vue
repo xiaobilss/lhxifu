@@ -1,70 +1,87 @@
 <template>
-    <div class="home">
-     <el-container>
+    <el-container class="home-container">
+        <!-- 头部区 -->
         <el-header>
-            <el-row >
-                <el-col :span="2" ><div ></div></el-col>
-                <el-col :span="20"><div>Hi,<span class="userName">{{userName}}</span>欢迎使用龙皇后台管理系统</div></el-col>
-                <el-col :span="2"><div class="userName" @click="signOut">退出</div></el-col>
-            </el-row>
+            <div>
+                <img src="../assets/logo.png">
+                Hi,<span class="userName">{{userName}}</span>欢迎使用龙皇后台管理系统
+            </div>
+             <el-button type="info" round @click="signOut" > 退出</el-button>
         </el-header>
+        <!-- 主体 -->
         <el-container>
-            <el-aside width="20%">
-                <el-row>
-                <el-col :span="24">
-                
-                    <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                   
-                    background-color="#545c64"
+            
+            <!-- 侧边栏 -->
+            <el-aside :width="toggle ? '65px':'200px'">
+                <div class="tag-nav" v-if="!toggle" @click="toggleClcik">
+                    <i class="el-icon-s-fold"></i>
+                    <span>收起</span>    
+                </div>
+                <div class="tag-nav" v-else @click="toggleClcik">
+                    <i class="el-icon-s-unfold"></i>
+                    <span>展开</span> 
+                </div>
+                <el-menu
+                    background-color="#333744"
                     text-color="#fff"
-                    active-text-color="#ffd04b">
+                    active-text-color="#409EFF"
+                    unique-opened
+                    :collapse="toggle"
+                    :collapse-transition="false">
                     <el-submenu index="1">
                         <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span>全部产品</span>
+                            <i class="el-icon-location"></i>
+                            <span>导航一</span>
                         </template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                        <el-menu-item index="1-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="1-4">
-                        <template slot="title">选项4</template>
-                        <el-menu-item index="1-4-1">选项1</el-menu-item>
-                        </el-submenu>
+                         <el-menu-item index="1-1">
+                           <template slot="title">
+                                <i class="el-icon-location"></i>
+                                <span>导航一</span>
+                            </template>  
+                         </el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="5">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span>导航一</span>
+                        </template>
+                         <el-menu-item index="1-1">
+                           <template slot="title">
+                                <i class="el-icon-location"></i>
+                                <span>导航一</span>
+                            </template>  
+                         </el-menu-item>
                     </el-submenu>
                     <el-menu-item index="2">
                         <i class="el-icon-menu"></i>
-                        <span slot="title">全部产品</span>
+                        <span slot="title">导航二</span>
                     </el-menu-item>
-                   <el-menu-item index="3">
-                        <i class="el-icon-menu"></i>
+                    
+                    <el-menu-item index="3">
+                        <i class="el-icon-setting"></i>
                         <span slot="title">客户管理</span>
                     </el-menu-item>
                     <el-menu-item index="4">
-                        <i class="el-icon-menu"></i>
+                        <i class="el-icon-setting"></i>
                         <span slot="title">网站管理</span>
                     </el-menu-item>
-                    </el-menu>
-                </el-col>
-                </el-row>
+                </el-menu>
             </el-aside>
-            <el-main>Main</el-main>
+            <!-- 右边内容 -->
+            <el-main>
+                <router-view></router-view>
+            </el-main>
         </el-container>
-     </el-container>
-    </div>
+    </el-container>
+    
 </template>
 <script>
 import user from "../network/user"
 export default {
     data(){
         return{
-            userName:""            
+            userName:"",
+            toggle:false            
         }
     },
     created(){
@@ -72,9 +89,14 @@ export default {
         
     },
     methods:{
+        //退出
         signOut(){
             window.sessionStorage.clear();
             this.$router.push("/login");
+        },
+        // 展开 /  收齐
+        toggleClcik(){
+            this.toggle=!this.toggle
         }
     }
 
@@ -82,34 +104,49 @@ export default {
 }
 </script>
 <style  scoped>
-    .el-header,.el-footer {
-        background-color: #B3C0D1;
-        color: #333;
-        text-align: center;
-        line-height: 60px;
-    }
-  
-    .el-container{
-        height: 100vh;
-    }
-    .el-aside {
-        background-color: #D3DCE6;
-        color: #333;
-        text-align: center;
-        line-height: 200px;
-    }
-    .el-main {
-        background-color: #E9EEF3;
-        color: #333;
-        text-align: center;
-        line-height: 160px;
-    }
+.home-container{
+    height: 100vh;
+}
+.el-header{
+    background-color: #373d41;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+}
+.el-header>div{
+    display: flex;
+    align-items: center;
+}
+.el-header>div>img{
+    width: 50px;
+    height: 50px;
+    margin-right: 20px  ;
+}
 
-  .el-row {
-    margin-bottom: 20px;
-  }
-  .userName{
-      color: var(--app-theme-color);
-  }
+.el-aside{
+    background-color: #373d41;
+}
+.el-main{
+    background-color: #eaedf1;
+}
+.el-menu{
+    border-right: none;
+}
+.tag-nav{
+    background-color: #4a5064;
+    color: #fff;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+}
+.tag-nav i{
+    margin-right: 5px;
+}
   
 </style>

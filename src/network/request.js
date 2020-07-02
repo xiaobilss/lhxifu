@@ -56,20 +56,9 @@ export function request(config){
     })
     //拦截器 Interceptor
     instance.interceptors.request.use(config=>{
-        // const token = ''
-        // if (token !== null) {
-        //     config.headers[''] = token
-        // }
-        //请求成功  
-        // config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
         console.log("请求成功",config);
-        // config.transformRequest = [function (data) {
-        //     let src = ''
-        //     for (let item in data) {
-        //       src += encodeURIComponent(item) + '=' + encodeURIComponent(data[item]) + '&'
-        //     }
-        //     return src
-        //   }]
+        config.headers.Authorization = window.sessionStorage.getItem("autoken")
+     
         return config;
     },err=>{
         console.log("请求失败",err);

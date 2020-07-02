@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Login from "../views/Login.vue"
 import Home from "../views/Home.vue"
 import Mine from "../views/Mine.vue"
+import Website from "../views/website.vue"
 Vue.use(Router)
 
 
@@ -23,7 +24,15 @@ const router= new Router({
         {
             path:"/home",
             name:"Home",
-            component:Home
+            component:Home,
+            redirect:"/website",
+            children:[
+                {
+                    path:"/website",
+                    component:Website
+                }
+            ]
+            
         },
         {
             path:"/mine",

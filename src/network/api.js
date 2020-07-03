@@ -1,27 +1,28 @@
-import {request} from "./request"
-import qs from "qs"
+import {request} from "./request";
+import qs from "qs";
+const paramResult = {
+    pageNum: 0,
+    pageSize: 0
+};
 
 
 //登录接口
-
- function getLogin(phone,password){
- 
+ function queryLoginApi(phone,password){
     return  request({
         headers:{'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}, 
         method:"post",
         url:"login/checkUser",
         data:
-            qs.stringify(
-                {
-                    'param' : JSON.stringify({
-                        "username":phone,
-                        "password":password,
-                    })
-                }   
-            )  
-       
+            qs.stringify({
+                'param' : JSON.stringify({
+                    "username":phone,
+                    "password":password,
+                })
+            })  
     })
 }
+
+
 
 function querySubordinateSumApi(){
     return request({
@@ -37,7 +38,31 @@ function querySubordinateSumApi(){
     })
 }
 
+//查询 网站信息管理
+function queryWebsiteApi(){
+    return request({
+        method:"post",
+        url:"shopinfo/queryAllInfoByWeb",
+        data:qs.stringify({
+            'param' : JSON.stringify(paramResult)
+        })
+    })
+}
+//添加或者修改 网站信息管理
+function queryUpdateWebsiteApi(website){
+    return request({
+        method:"post",
+        url:"shopinfo/addInfoByWeb",
+        data:qs.stringify({
+            'param' : JSON.stringify(website)
+        })
+    })
+}
+
+
+
 export default {
-    getLogin,
-    querySubordinateSumApi,
+    queryLoginApi,
+    queryWebsiteApi,
+    queryUpdateWebsiteApi,
 }

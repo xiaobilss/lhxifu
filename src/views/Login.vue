@@ -60,7 +60,7 @@ export default {
             
             this.$refs.loginFormRef.validate(callback =>{
                 if(callback){
-                    Api.getLogin(this.form.userName,this.form.passWord)
+                    Api.queryLoginApi(this.form.userName,this.form.passWord)
                     .then( res =>{
                         if(res.result==="success"){
                             user.userName=this.form.userName;

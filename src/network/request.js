@@ -58,7 +58,13 @@ export function request(config){
     instance.interceptors.request.use(config=>{
         console.log("请求成功",config);
         config.headers.Authorization = window.sessionStorage.getItem("autoken")
-     
+        // config.transformRequest = [function (data) {
+        //     let src = ''
+        //     for (let item in data) {
+        //       src += encodeURIComponent(item) + '=' + encodeURIComponent(data[item]) + '&'
+        //     }
+        //     return src
+        //   }]
         return config;
     },err=>{
         console.log("请求失败",err);

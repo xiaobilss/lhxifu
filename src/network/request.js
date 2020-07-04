@@ -3,8 +3,8 @@ import axios from "axios"
 // const RUL="https://application.mingchetech.com/v1.0/";
 const RUL="http://47.100.49.243:8080/";
 // 测试环境
-const TestRUL="https://test.mingchetech.com/v1.0/";
-const isfalg =true
+const TestRUL="http://121.36.159.141:8080/";
+const isfalg =false
 
 export function login(config){
     //配置通用的
@@ -58,6 +58,7 @@ export function request(config){
     instance.interceptors.request.use(config=>{
         console.log("请求成功",config);
         config.headers.Authorization = window.sessionStorage.getItem("autoken")
+
         // config.transformRequest = [function (data) {
         //     let src = ''
         //     for (let item in data) {

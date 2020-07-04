@@ -27,41 +27,44 @@
                     active-text-color="#409EFF"
                     unique-opened
                     :collapse="toggle"
-                    :collapse-transition="false">
-                    <el-submenu index="1">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>导航一</span>
-                        </template>
-                         <el-menu-item index="1-1">
-                           <template slot="title">
-                                <i class="el-icon-location"></i>
-                                <span>导航一</span>
-                            </template>  
-                         </el-menu-item>
-                    </el-submenu>
-                    <el-submenu index="5">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>导航一</span>
-                        </template>
-                         <el-menu-item index="1-1">
-                           <template slot="title">
-                                <i class="el-icon-location"></i>
-                                <span>导航一</span>
-                            </template>  
-                         </el-menu-item>
-                    </el-submenu>
-                    <el-menu-item index="2">
+                    :collapse-transition="false"
+                    router>
+                    <el-menu-item index="customerBrand">
                         <i class="el-icon-menu"></i>
-                        <span slot="title">导航二</span>
+                        <span slot="title">全部品牌</span>
                     </el-menu-item>
+
+                    <el-menu-item index="allCategories">
+                        <i class="el-icon-setting"></i>
+                        <span slot="title">全部品类</span>
+                    </el-menu-item>
+
+                    <el-menu-item index="mine">
+                        <i class="el-icon-setting"></i>
+                        <span slot="title">全部产品</span>
+                    </el-menu-item>
+
+
+
+                    <!-- <el-submenu index="productType">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span>导航一</span>
+                        </template>
+                         <el-menu-item index="2-1">
+                           <template slot="title">
+                                <i class="el-icon-location"></i>
+                                <span>导航一</span>
+                            </template>  
+                         </el-menu-item>
+                    </el-submenu> -->
                     
-                    <el-menu-item index="3">
+                    
+                    <el-menu-item index="customer">
                         <i class="el-icon-setting"></i>
                         <span slot="title">客户管理</span>
                     </el-menu-item>
-                    <el-menu-item index="4">
+                    <el-menu-item index="website">
                         <i class="el-icon-setting"></i>
                         <span slot="title">网站管理</span>
                     </el-menu-item>

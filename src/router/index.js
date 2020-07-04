@@ -4,6 +4,10 @@ import Login from "../views/Login.vue"
 import Home from "../views/Home.vue"
 import Mine from "../views/Mine.vue"
 import Website from "../views/website.vue"
+import Customer from "../views/Customer.vue"
+import ProductType from "../views/ProductType.vue"
+import CustomerBrand from "../views/CustomerBrand.vue"
+import AllCategories from "../views/AllCategories.vue"
 Vue.use(Router)
 
 
@@ -18,27 +22,51 @@ const router= new Router({
         },
         {
             path:"/login",
-            name:"Login",
+            name:"login",
             component:Login
         },
         {
             path:"/home",
-            name:"Home",
+            name:"home",
             component:Home,
             redirect:"/website",
             children:[
                 {
                     path:"/website",
+                    name:"website",
                     component:Website
-                }
+                },
+                {
+                    path:"/customer",
+                    name:"customer",
+                    component:Customer
+                },
+                {
+                    path:"/productType",
+                    name:"productType",
+                    component:ProductType
+                },
+                {
+                    path:"/customerBrand",
+                    name:"customerBrand",
+                    component:CustomerBrand
+                },
+                {
+                    path:"/allCategories",
+                    name:"allCategories",
+                    component:AllCategories
+                },
+                {
+                    path:"/mine",
+                    name:"mine",
+                    component:Mine
+                },
+
+                
             ]
             
         },
-        {
-            path:"/mine",
-            name:"mine",
-            component:Mine
-        },
+        
     ]    
     
 })

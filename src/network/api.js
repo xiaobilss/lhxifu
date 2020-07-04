@@ -1,8 +1,8 @@
 import {request} from "./request";
 import qs from "qs";
 const paramResult = {
-    pageNum: 0,
-    pageSize: 0
+    pageNum: 1,
+    pageSize: 20
 };
 
 
@@ -58,6 +58,36 @@ function queryUpdateWebsiteApi(website){
         })
     })
 }
+//查询客户信息管理
+function queryCustomerApi(){
+    return request({
+        method:"post",
+        url:"contect/queryContect",
+        data:qs.stringify({
+            'param' : JSON.stringify(paramResult)
+        })
+    })
+}
+//查询品牌信息
+function queryCustomerBrandApi(){
+    return request({
+        method:"post",
+        url:"menu/queryAllOneLevelMenu",
+        data:qs.stringify({
+            'param' : JSON.stringify(paramResult)
+        })
+    })
+}
+//查询品牌分类信息
+function queryErpTwoLevelMenu(){
+    return request({
+        method:"post",
+        url:"menu/queryErpAllTwoLevelMenu",
+        data:qs.stringify({
+            'param' : JSON.stringify(paramResult)
+        })
+    })
+}
 
 
 
@@ -65,4 +95,7 @@ export default {
     queryLoginApi,
     queryWebsiteApi,
     queryUpdateWebsiteApi,
+    queryCustomerApi,
+    queryCustomerBrandApi,
+    queryErpTwoLevelMenu,
 }

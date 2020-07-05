@@ -7,11 +7,11 @@
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
                 <el-dropdown-menu slot="dropdown" >
-                    <el-dropdown-item v-for="(item,key) of listData"  :key="key"   @click.native="handleClick(item.menuName)"  >{{item.menuName}}</el-dropdown-item>
+                    <el-dropdown-item v-for="(item,key) of listData"  :key="key"   @click.native="handleClick(item.menuName,item.codeId )"  >{{item.menuName}}</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </header>
-        <el-table 
+        <el-table
             style="width: 96%"
             :data="itemDatalist">
             <el-table-column
@@ -29,7 +29,7 @@
                 label="创建时间"
                 align="center">
             </el-table-column>
-            <el-table-column 
+            <el-table-column
                 label="操作"
                 align="center">
                 <template >
@@ -42,8 +42,8 @@
                    </div>
                 </template>
             </el-table-column>
-            
-            
+
+
         </el-table>
     </div>
 </template>
@@ -53,7 +53,7 @@ export default {
     data(){
         return{
             mudel:"更多菜单",
-          
+
             listData:[],
             listItemData:[],
             itemDatalist:[],
@@ -72,34 +72,38 @@ export default {
                 this.$message.error(err.message)
             });
         },
-        handleClick(menuName){//
+        handleClick(menuName,codeId){//
             this.$data.mudel = menuName;
+            this.$data.mudelId= codeId;
+            console.log("menuName:"+menuName);
+            console.log(this.$data.mudelId);
+
             this.getCodeId(this.$data.mudelId)
-            console.log(menuName);   
+
         },
         getqueryErpTwoLevelMenu(){
             Api.queryErpTwoLevelMenu()
             .then(res =>{
-                
+
             //   console.log(res.data.list);
                 this.$data.listItemData = res.data.list;
                 this.itemDatalist = this.$data.listItemData.filter(item =>   item.superId == this.mudelId);
-            
-                
+
+
 
                 // getCodeId(this.itemDatalist)
-                
-                
+
+
             })
             .catch( err =>{
                 this.$message.error(err.message)
             });
         },
         getCodeId(codeId){
-            return this.$data.listItemData.filter(item =>   item.superId == codeId);
+            return this.itemDatalist = this.$data.listItemData.filter(item =>   item.superId == codeId);
         }
 
-         
+
     },
     created(){
         //品牌

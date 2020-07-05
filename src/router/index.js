@@ -1,13 +1,23 @@
 import Router from 'vue-router'
-import Vue from 'vue'
-import Login from "../views/Login.vue"
-import Home from "../views/Home.vue"
-import Mine from "../views/Mine.vue"
-import Website from "../views/website.vue"
-import Customer from "../views/Customer.vue"
-import ProductType from "../views/ProductType.vue"
-import CustomerBrand from "../views/CustomerBrand.vue"
-import AllCategories from "../views/AllCategories.vue"
+import Vue from  'vue'
+// import Login  from "../views/Login.vue"
+const Login = ()=> import("../views/Login.vue")
+const Home = ()=> import("../views/Home.vue")
+
+const Mine = ()=> import("../views/Mine.vue")
+const Website = ()=> import("../views/website.vue")
+const Customer = ()=> import("../views/Customer.vue")
+const ProductType = ()=> import("../views/ProductType.vue")
+const CustomerBrand = ()=> import("../views/CustomerBrand.vue")
+const AllCategories = ()=> import("../views/AllCategories.vue")
+
+
+// import Mine from  "../views/Mine.vue"
+// import Website from  "../views/website.vue"
+// import Customer from  "../views/Customer.vue"
+// import ProductType from  "../views/ProductType.vue"
+// import CustomerBrand from  "../views/CustomerBrand.vue"
+// import AllCategories from  "../views/AllCategories.vue"
 Vue.use(Router)
 
 
@@ -62,13 +72,13 @@ const router= new Router({
                     component:Mine
                 },
 
-                
+
             ]
-            
+
         },
-        
-    ]    
-    
+
+    ]
+
 })
 
 router.beforeEach((to,from,next)=>{

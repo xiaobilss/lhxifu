@@ -20,5 +20,17 @@
     "@vue/cli-service": "~4.4.0",
     "less-loader": "^6.1.2",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "description": "```\r npm install\r ```",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaobilss/lhxifu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaobilss/lhxifu/issues"
+  },
+  "homepage": "https://github.com/xiaobilss/lhxifu#readme"
 }

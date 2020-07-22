@@ -4,7 +4,7 @@ import axios from "axios"
 const RUL="http://47.100.49.243:8080/";
 // 测试环境
 const TestRUL="http://121.36.159.141:8080/";
-const isfalg =false
+const isfalg =true
 
 export function login(config){
     //配置通用的
@@ -14,9 +14,9 @@ export function login(config){
     })
     //拦截器 Interceptor
     instance.interceptors.request.use(config=>{
-        //请求成功  
+        //请求成功
         config.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-  
+
 
         // return
         // config.transformRequest = [function (data) {
@@ -40,7 +40,7 @@ export function login(config){
         return res.data;
     },err=>{
         //响应失败
-        console.log(err);   
+        console.log(err);
     })
     //请求网咯
     return  instance(config)
@@ -74,7 +74,7 @@ export function request(config){
         console.log("响应成功",res);
         return res.data;
     },err=>{
-        console.log("响应失败",err);   
+        console.log("响应失败",err);
     })
     //请求网咯
     return  instance(config)

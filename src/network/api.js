@@ -9,7 +9,7 @@ const paramResult = {
 //登录接口
  function queryLoginApi(phone,password){
     return  request({
-        headers:{'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}, 
+        headers:{'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
         method:"post",
         url:"login/checkUser",
         data:
@@ -18,7 +18,7 @@ const paramResult = {
                     "username":phone,
                     "password":password,
                 })
-            })  
+            })
     })
 }
 
@@ -32,9 +32,9 @@ function querySubordinateSumApi(){
         data:{
             brand_id:brandId,
         },
-      
-        
-        
+
+
+
     })
 }
 
@@ -88,6 +88,64 @@ function queryErpTwoLevelMenu(){
         })
     })
 }
+// 新增品牌分类信息
+function queryaddMenu(){
+  return request({
+    method:"post",
+    url:"/menu/insertMenu",
+    data:qs.stringify({
+      'param' : JSON.stringify(paramResult)
+    })
+  })
+}
+//  新增品牌
+function queryaddBrand(brand){
+  let paramResults ={
+    menuName: brand,
+    menuType: 0,
+    state:0
+  }
+  return request({
+    method:"post",
+    url: "/menu/insertMenu",
+    data:qs.stringify({
+      'param' : JSON.stringify(paramResults)
+    })
+  })
+}
+//  删除品牌
+function querydelBrand(id){
+  let paramResults ={
+    codeId: id
+    // menuType: 0,
+    // state:0
+  }
+  return request({
+    method:"post",
+    url: "menu/deleteMenu",
+    data:qs.stringify({
+      'param' : JSON.stringify(paramResults)
+    })
+  })
+}
+
+//  修改品牌
+function queryupdateBrand(id,name){
+  let paramResults ={
+    codeId: id,
+    state:0,
+    menuName:name,
+    menuType:0  //0 是品牌 1: 是二级
+
+  }
+  return request({
+    method:"post",
+    url: "menu/updateMenu",
+    data:qs.stringify({
+      'param' : JSON.stringify(paramResults)
+    })
+  })
+}
 
 
 
@@ -98,4 +156,8 @@ export default {
     queryCustomerApi,
     queryCustomerBrandApi,
     queryErpTwoLevelMenu,
+    queryaddMenu,
+    queryaddBrand,
+    querydelBrand,
+    queryupdateBrand,
 }

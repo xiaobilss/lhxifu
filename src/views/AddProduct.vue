@@ -1,63 +1,37 @@
 <template>
-    <div class="AllCategories">
-        <header>
+    <div class="Addproduct">
+        <h2 class="top">新增产品</h2>
+        <div>
+            <span class="Addbrand">新增品牌类型</span>
             <el-dropdown   >
-                <el-button type="primary"   >
+                <el-button type="primary" class="elBtn" >
                     {{mudel}}
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
-                <el-button type="success"  @click="addproduct" >新增</el-button>
-                <el-dropdown-menu slot="dropdown" >
+                <el-dropdown-menu slot="dropdown" class="elBtn" >
                     <el-dropdown-item v-for="(item,key) of listData"  :key="key"   @click.native="handleClick(item.menuName,item.codeId )"  >{{item.menuName}}</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
-        </header>
-        <el-table
-            style="width: 96%"
-            :data="itemDatalist">
-            <el-table-column
-                prop="id"
-                label="产品编号"
-                align="center">
-            </el-table-column>
-            <el-table-column
-                prop="menuName"
-                label="产品名称"
-                align="center">
-            </el-table-column>
-            <el-table-column
-                prop="createTime"
-                label="创建时间"
-                align="center">
-            </el-table-column>
-            <el-table-column
-                label="操作"
-                align="center">
-                <template >
-                   <div class="column-but">
-                        <!-- <el-button
-                    size="mini">编辑</el-button> -->
-                    <el-button
-                    size="mini"
-                    type="danger">删除</el-button>
-                   </div>
-                </template>
-            </el-table-column>
+        </div>
+        <div class="addpin">
+           <span >产品名称</span>
+           <el-input v-model="input" placeholder="请输入内容"></el-input>
+        </div>
 
+         <el-button type="success" round class="submit">成功按钮</el-button>
 
-        </el-table>
     </div>
 </template>
 <script>
 import Api from "../network/api"
 export default {
+  name:"Addproduct",
     data(){
         return{
             mudel:"更多菜单",
-
+            input:"",
             listData:[],
             listItemData:[],
-            itemDatalist:[],
         }
     },
     methods: {
@@ -85,27 +59,23 @@ export default {
         getqueryErpTwoLevelMenu(){
             Api.queryErpTwoLevelMenu()
             .then(res =>{
-
             //   console.log(res.data.list);
                 this.$data.listItemData = res.data.list;
                 this.itemDatalist = this.$data.listItemData.filter(item =>   item.superId == this.mudelId);
-
-
-
                 // getCodeId(this.itemDatalist)
-
-
             })
             .catch( err =>{
                 this.$message.error(err.message)
             });
         },
+        getqueryaddMenug(){
+          Api.queryaddMenu()
+          .then(res =>{})
+          .catch(err =>{})
+        },
         getCodeId(codeId){
             return this.itemDatalist = this.$data.listItemData.filter(item =>   item.superId == codeId);
         },
-        addproduct(){
-           this.$router.push("/addproduct");
-        }
 
 
     },
@@ -113,8 +83,7 @@ export default {
         //品牌
         this.getCustomerBrand();
         // console.log("---");
-        //产品
-        this.getqueryErpTwoLevelMenu();
+
     }
 }
 </script>
@@ -122,5 +91,26 @@ export default {
     .el-table{
         margin-top: 30px;
     }
+    .Addbrand{
+        margin-top: 50px;
+        margin-left: 20px;
+        margin-right: 30px;
+    }
+    .elBtn{
+      width: 800px;
+    }
+    .addpin{
+        margin: 50px;
+    }
+    .el-input{
+         margin-left: 30px;
+      width: 800px;
+    }
+
+    .submit{
+      width: 300px;
+      margin-left: 400px;
+    }
+
 
 </style>

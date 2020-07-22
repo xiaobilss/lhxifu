@@ -10,6 +10,7 @@ const Customer = ()=> import("../views/Customer.vue")
 const ProductType = ()=> import("../views/ProductType.vue")
 const CustomerBrand = ()=> import("../views/CustomerBrand.vue")
 const AllCategories = ()=> import("../views/AllCategories.vue")
+const AddProduct = ()=> import("../views/AddProduct.vue")
 
 
 // import Mine from  "../views/Mine.vue"
@@ -70,6 +71,11 @@ const router= new Router({
                     path:"/mine",
                     name:"mine",
                     component:Mine
+                },
+                {
+                  path:"/addproduct",
+                  name:"addproduct",
+                  component:AddProduct
                 },
 
 

@@ -149,6 +149,38 @@ function queryupdateBrand(id,name){
 
 
 
+
+//  新增品牌,二级产品 
+function queryaddBrandSuper(brand,superId){
+  let paramResultss ={
+    menuName: brand,
+    menuType: 1,
+    state:0,
+    superId:superId
+  }
+  return request({
+    method:"post",
+    url: "menu/insertMenu",
+    data:qs.stringify({
+      'param' : JSON.stringify(paramResultss)
+    })
+  })
+}
+//  删除品牌,二级产品 
+function querydelBrandSuper(id){
+  let paramResults ={
+    codeId: id,
+    menuType: 1,
+    state:0
+  }
+  return request({
+    method:"post",
+    url: "menu/deleteMenu",
+    data:qs.stringify({
+      'param' : JSON.stringify(paramResults)
+    })
+  })
+}
 export default {
     queryLoginApi,
     queryWebsiteApi,
@@ -160,4 +192,6 @@ export default {
     queryaddBrand,
     querydelBrand,
     queryupdateBrand,
+    queryaddBrandSuper,
+    querydelBrandSuper
 }

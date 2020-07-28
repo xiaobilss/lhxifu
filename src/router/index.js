@@ -40,7 +40,7 @@ const router= new Router({
             path:"/home",
             name:"home",
             component:Home,
-            redirect:"/website",
+            redirect:"/customerBrand",
             children:[
                 {
                     path:"/website",

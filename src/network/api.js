@@ -2,7 +2,7 @@ import {request} from "./request";
 import qs from "qs";
 const paramResult = {
     pageNum: 1,
-    pageSize: 20
+    pageSize: 200
 };
 
 
@@ -150,7 +150,7 @@ function queryupdateBrand(id,name){
 
 
 
-//  新增品牌,二级产品 
+//  新增品牌,二级产品
 function queryaddBrandSuper(brand,superId){
   let paramResultss ={
     menuName: brand,
@@ -166,7 +166,7 @@ function queryaddBrandSuper(brand,superId){
     })
   })
 }
-//  删除品牌,二级产品 
+//  删除品牌,二级产品
 function querydelBrandSuper(id){
   let paramResults ={
     codeId: id,

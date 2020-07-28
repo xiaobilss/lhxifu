@@ -36,14 +36,14 @@
           </el-menu-item>
 
           <el-menu-item index="allCategories">
-            <i class="el-icon-setting"></i>
+            <i class="el-icon-s-data"></i>
             <span slot="title">全部品类</span>
           </el-menu-item>
 
-          <el-menu-item index="mine">
+          <!-- <el-menu-item index="mine">
             <i class="el-icon-setting"></i>
             <span slot="title">全部产品</span>
-          </el-menu-item>
+          </el-menu-item> -->
 
           <!-- <el-submenu index="productType">
                         <template slot="title">
@@ -54,16 +54,16 @@
                            <template slot="title">
                                 <i class="el-icon-location"></i>
                                 <span>导航一</span>
-                            </template>  
+                            </template>
                          </el-menu-item>
                     </el-submenu> -->
 
           <el-menu-item index="customer">
-            <i class="el-icon-setting"></i>
+            <i class="el-icon-user-solid"></i>
             <span slot="title">客户管理</span>
           </el-menu-item>
           <el-menu-item index="website">
-            <i class="el-icon-setting"></i>
+            <i class="el-icon-s-operation"></i>
             <span slot="title">网站管理</span>
           </el-menu-item>
         </el-menu>

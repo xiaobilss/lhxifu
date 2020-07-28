@@ -86,6 +86,7 @@ export default {
         .then(res => {
           //   console.log(res.data.list);
           this.$data.listItemData = res.data.list;
+          console.info(this.$data.listItemData);
           this.itemDatalist = this.$data.listItemData.filter(
             item => item.superId == this.mudelId
           );
@@ -119,7 +120,7 @@ export default {
                 message: "删除成功!"
               });
               this.$nextTick(() => {
-                this.getCustomerBrand();
+                this.getqueryErpTwoLevelMenu();
               });
             })
             .catch(err => {
